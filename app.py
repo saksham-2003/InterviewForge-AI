@@ -1,4 +1,6 @@
 from modules.resume_analyzer import analyze_resume
+from modules.skill_extractor import extract_skills
+from modules.question_generator import generate_questions
 import streamlit as st
 from modules.resume_parser import extract_text_from_pdf
 
@@ -38,3 +40,15 @@ if st.button("Analyze Resume"):
         st.subheader("AI Resume Analysis")
 
         st.write(analysis)
+
+if st.button("Generate Interview Questions"):
+
+    with st.spinner("Generating Questions..."):
+
+        skills = extract_skills(resume_text)
+
+        questions = generate_questions(skills)
+
+        st.subheader("Personalized Interview Questions")
+
+        st.write(questions)
