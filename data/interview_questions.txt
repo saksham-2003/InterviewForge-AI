@@ -1,0 +1,51 @@
+What is Python?
+What are Python decorators?
+Explain multithreading in Python.
+What is the GIL in Python?
+What is object oriented programming?
+What is polymorphism?
+What is inheritance?
+What is encapsulation?
+What is TensorFlow?
+What is PyTorch?
+Difference between TensorFlow and PyTorch.
+What is overfitting?
+What is underfitting?
+Explain gradient descent.
+What is transfer learning?
+What is a CNN?
+What is an RNN?
+What is OpenCV?
+Difference between YOLOv5 and YOLOv8.
+What is computer vision?
+What is NumPy?
+What is Pandas?
+What is data preprocessing?
+What is feature engineering?
+What is a REST API?
+What is Node.js?
+What is Express.js?
+What is MongoDB?
+Difference between SQL and NoSQL.
+What is indexing in databases?
+What is React?
+What is Virtual DOM?
+What is React state?
+What are React hooks?
+Explain asynchronous programming.
+What is Git?
+What is GitHub?
+What is Docker?
+What is API deployment?
+What is Flask?
+What is FastAPI?
+What is model evaluation?
+What is precision and recall?
+What is F1-score?
+What is mAP in object detection?
+What is batch normalization?
+What is dropout?
+What is data augmentation?
+How does object detection work?
+How would you optimize a deep learning model?
+How would you deploy a machine learning model?
