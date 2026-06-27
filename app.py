@@ -1,3 +1,4 @@
+from modules.rag_retriever import retrieve_questions
 from modules.resume_analyzer import analyze_resume
 from modules.skill_extractor import extract_skills
 from modules.question_generator import generate_questions
@@ -23,6 +24,8 @@ if uploaded_file is not None:
 
     resume_text = extract_text_from_pdf(uploaded_file)
 
+else:
+    resume_text = ""
     st.subheader("Extracted Resume Text")
 
     st.text_area(
@@ -47,8 +50,33 @@ if st.button("Generate Interview Questions"):
 
         skills = extract_skills(resume_text)
 
-        questions = generate_questions(skills)
+        # Handle both string and list outputs
+        if isinstance(skills, str):
+            query = skills
+        else:
+            query = " ".join(skills)
 
-        st.subheader("Personalized Interview Questions")
+        retrieved_questions = retrieve_questions(
+            query
+        )
 
-        st.write(questions)
+        st.subheader(
+            "Retrieved Questions from Knowledge Base"
+        )
+
+        st.write(
+            retrieved_questions
+        )
+
+        questions = generate_questions(
+            skills,
+            retrieved_questions
+        )
+
+        st.subheader(
+            "RAG Powered Personalized Interview Questions"
+        )
+
+        st.write(
+            questions
+        )
