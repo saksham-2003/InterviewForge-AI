@@ -1,4 +1,5 @@
 import os
+import json
 from dotenv import load_dotenv
 from groq import Groq
 
@@ -20,28 +21,40 @@ Question:
 Ideal Answer:
 {ideal_answer}
 
-Candidate's Answer:
+Candidate Answer:
 {user_answer}
 
-Evaluate the candidate.
+Evaluate the answer and return ONLY a valid JSON object.
 
-Give:
+Format:
 
-1. Technical Accuracy (out of 10)
+{{
+    "technical_accuracy": 0,
+    "completeness": 0,
+    "communication": 0,
+    "overall_score": 0,
+    "strengths": [
+        "...",
+        "..."
+    ],
+    "weaknesses": [
+        "...",
+        "..."
+    ],
+    "improvements": [
+        "...",
+        "...",
+        "..."
+    ],
+    "summary": "Short overall feedback"
+}}
 
-2. Completeness (out of 10)
+Rules:
 
-3. Communication (out of 10)
-
-4. Overall Score (out of 10)
-
-5. Strengths
-
-6. Weaknesses
-
-7. Specific Improvements
-
-Be constructive and detailed.
+- Scores must be between 0 and 10.
+- Return ONLY JSON.
+- No markdown.
+- No explanation outside JSON.
 """
 
     response = client.chat.completions.create(
@@ -54,4 +67,6 @@ Be constructive and detailed.
         ]
     )
 
-    return response.choices[0].message.content
+    return json.loads(
+        response.choices[0].message.content
+    )
