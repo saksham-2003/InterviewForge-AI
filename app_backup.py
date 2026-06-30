@@ -22,7 +22,7 @@ if uploaded_file is not None:
 
     st.success("Resume uploaded successfully!")
 
-    resume_text = extract_text_from_pdf(uploaded_file)
+    st.session_state.resume_text = extract_text_from_pdf(uploaded_file)
 
 else:
     resume_text = ""

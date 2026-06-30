@@ -105,6 +105,9 @@ class InterviewEngine:
         self.session.save_answer(user_answer)
 
         self.session.save_evaluation(evaluation)
+        self.session.add_score(
+            evaluation["overall_score"]
+        )
 
         return evaluation
 
@@ -116,3 +119,6 @@ class InterviewEngine:
             return None
 
         return self.session.get_current_question()
+    def get_report(self):
+
+        return self.session.get_report()

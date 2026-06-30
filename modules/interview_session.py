@@ -51,3 +51,11 @@ class InterviewSession:
             self.total_score / len(self.evaluations),
             2
         )
+    def get_report(self):
+
+        return {
+            "questions_answered": len(self.answers),
+            "total_questions": len(self.questions),
+            "average_score": self.average_score(),
+            "evaluations": self.evaluations
+        }

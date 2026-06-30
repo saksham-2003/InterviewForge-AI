@@ -67,6 +67,12 @@ Rules:
         ]
     )
 
-    return json.loads(
+    result = json.loads(
         response.choices[0].message.content
+    )   
+
+    result["overall_score"] = float(
+        result["overall_score"]
     )
+
+    return result
