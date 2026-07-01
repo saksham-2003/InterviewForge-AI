@@ -1,7 +1,7 @@
 ﻿import streamlit as st
-
-from auth_service import AuthService
 from ui.auth_views import render_login_page, render_signup_page
+from auth_service import AuthService
+import ui.auth_views as auth_views
 from ui_pages.home import render_home
 from ui_pages.ats import render_ats
 from ui_pages.interview import render_interview
@@ -29,7 +29,7 @@ def initialize_state():
         "auth_guest": False,
         "auth_message": "",
         "auth_message_type": "",
-        "auth_remember_me": False,
+        "auth_remember": False,
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -77,15 +77,23 @@ st.set_page_config(
 )
 st.markdown(load_css(), unsafe_allow_html=True)
 
+# ---------------- AUTH MESSAGE AREA ---------------- #
 
-if not is_authenticated() and not is_guest_mode():
-    #if st.session_state.auth_message:
-        #if st.session_state.auth_message_type == "success":
+#message_container = st.container()
+
+#with message_container:
+    #if st.session_state.get("auth_message", ""):
+
+        #if st.session_state.get("auth_message_type") == "success":
             #st.success(st.session_state.auth_message)
-        #elif st.session_state.auth_message_type == "error":
+
+        #elif st.session_state.get("auth_message_type") == "error":
             #st.error(st.session_state.auth_message)
+
         #else:
             #st.info(st.session_state.auth_message)
+if not is_authenticated() and not is_guest_mode():
+    
 
     if st.session_state.auth_mode == "signup":
         result = render_signup_page(auth_service)
@@ -100,7 +108,7 @@ if not is_authenticated() and not is_guest_mode():
                 st.session_state.auth_message_type = "error"
                 st.rerun()
     else:
-        result = render_login_page(auth_service)
+        result = auth_views.render_login_page(auth_service)
         if result is not None:
             if result.get("guest"):
                 st.session_state.auth_guest = True
@@ -115,7 +123,7 @@ if not is_authenticated() and not is_guest_mode():
                 st.session_state.auth_message = result["message"]
                 st.session_state.auth_message_type = "success"
                 st.session_state.current_page = "Dashboard"
-                st.session_state.auth_remember_me = result.get("remember_me", False)
+                st.session_state.auth_remember = result.get("remember_me", False)
                 st.rerun()
             else:
                 st.session_state.auth_message = result["message"]
